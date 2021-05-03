@@ -1,0 +1,30 @@
+on: [push]
+
+jobs:
+  env_var_mapping:
+    runs-on: ubuntu-latest
+    name: A job to say hello
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+          
+      # To use this repository's private action,
+      # you must check out the repository
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Sets Environment Vars from
+        uses: ./ # Uses an action in the root directory
+        id: Param-Store-Env-Action-Test
+        with:
+          who-to-greet: 'Mona the Octocat'
+          params-root: '/path1'
+          mapping-file: './test_mappings/test_map1.json'
+      # Use the output from the `hello` step
+      - name: Get env vars mapped
+        run: |
+          echo $envVar1\
+          echo $envVar2\
