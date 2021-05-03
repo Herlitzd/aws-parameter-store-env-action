@@ -1,0 +1,24 @@
+{
+  "name": "aws-parameter-store-env-action",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "INPUT_MAPPING_FILE='./test_mappings/test_map1.json'&& INPUT_PARAMS_ROOT='/path1'&& GITHUB_ENV=./test-env && node ./lib/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@actions/core": "^1.2.7",
+    "@actions/github": "^4.0.0",
+    "aws-sdk": "^2.897.0"
+  },
+  "devDependencies": {
+    "@types/node": "^15.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "eslint": "^7.25.0",
+    "typescript": "^4.2.4"
+  }
+}
