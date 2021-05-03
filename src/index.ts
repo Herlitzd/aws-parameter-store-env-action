@@ -58,7 +58,9 @@ const handleParameterResponse = (fullPathMap: Record<string, string>) =>
           core.info("Environment variables set:\n" + mappedCorrectly.join('\n'));
 
           const notMapped = Object.values(fullPathMap).filter(x => !mappedCorrectly.includes(x));
-          core.warning("Parameters expected, but not found: \n" + notMapped.join('\n'));
+          if (notMapped.length) {
+            core.warning("Parameters expected, but not found:\n" + notMapped.join('\n'));
+          }
         });
     }
   }

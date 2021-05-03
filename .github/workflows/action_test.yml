@@ -25,5 +25,5 @@ jobs:
       # Use the output from the `hello` step
       - name: Get env vars mapped
         run: |
-          echo "::debug::$envVar1"\
-          echo "::debug::$envVar2"
+          echo "::warning::envVar1=$envVar1\n"\
+          echo "::warning::envVar2=$envVar2"
