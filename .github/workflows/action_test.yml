@@ -3,7 +3,7 @@ on: [push]
 jobs:
   env_var_mapping:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: Testing mappings
     steps:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -20,7 +20,6 @@ jobs:
         uses: ./ # Uses an action in the root directory
         id: Param-Store-Env-Action-Test
         with:
-          who-to-greet: 'Mona the Octocat'
           params-root: '/path1'
           mapping-file: './test_mappings/test_map1.json'
       # Use the output from the `hello` step
