@@ -10,4 +10,4 @@ inputs:
     default: '.github/aws-parameter-map.json'
 runs:
   using: 'node12'
-  main: 'index.js'
+  main: 'lib/index.js'
