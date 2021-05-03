@@ -20,10 +20,10 @@ jobs:
         uses: ./ # Uses an action in the root directory
         id: Param-Store-Env-Action-Test
         with:
-          params-root: '/path1'
-          mapping-file: './test_mappings/test_map1.json'
+          params-root: "/path1"
+          mapping-file: "./test_mappings/test_map1.json"
       # Use the output from the `hello` step
       - name: Get env vars mapped
         run: |
-          echo $envVar1\
-          echo $envVar2\
+          echo "::debug::$envVar1"\
+          echo "::debug::$envVar2"

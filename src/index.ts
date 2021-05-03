@@ -17,9 +17,9 @@ interface MappedValue {
 }
 
 const run = async () => {
-  const paramBasePath = core.getInput('PARAMS_ROOT');
+  const paramBasePath = core.getInput('params-root');
 
-  const mappingFilePath = core.getInput('MAPPING_FILE', { required: true });
+  const mappingFilePath = core.getInput('mapping-file', { required: true });
 
   const mappingFile = path.join(process.env['GITHUB_WORKSPACE'] || '', mappingFilePath);
   await fs.access(mappingFile, fsConstants.R_OK)
