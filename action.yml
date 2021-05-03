@@ -8,7 +8,6 @@ inputs:
     description: 'Path to json file describing mapping from ParameterStore values to Environment Variables'
     required: true
     default: '.github/aws-parameter-map.json'
-outputs:
 runs:
   using: 'node12'
   main: 'index.js'
