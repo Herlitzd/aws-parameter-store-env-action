@@ -2,10 +2,10 @@ name: 'AWS ParameterStore Environment Mapping Action'
 description: 'Maps environment variables for Github action from AWS ParameterStore'
 inputs:
   params-root:
-    description: 'ParameterStore root path'
+    description: ParameterStore root path
     required: true
   mapping-file:
-    description: 'Path from the repo's root to json file describing mapping from ParameterStore values to environment variables'
+    description: Path from the repo's root to json file describing mapping from ParameterStore values to environment variables
     required: true
     default: '.github/aws-parameter-map.json'
 runs:
