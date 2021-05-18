@@ -39,7 +39,7 @@ const handleParameterResponse = (fullPathMap: Record<string, string>) =>
       throw { message: 'failed to load parameter store values', error }
     }
     if (data.Parameters) {
-      const valueMap: MappedValue[] = data.Parameters.filter(p => p.Name && p.Value).map(p => (
+      const valueMap: MappedValue[] = data.Parameters.filter(p => p.Name && p.Value && fullPathMap[p.Name]).map(p => (
         {
           envVar: fullPathMap[p.Name || '__unmapped_key'], // The filter handles these cases
           value: p.Value || '__unmapped_value'
