@@ -5,7 +5,7 @@ inputs:
     description: 'ParameterStore root path'
     required: true
   mapping-file:
-    description: 'Path to json file describing mapping from ParameterStore values to Environment Variables'
+    description: 'Path from the repo's root to json file describing mapping from ParameterStore values to environment variables'
     required: true
     default: '.github/aws-parameter-map.json'
 runs:

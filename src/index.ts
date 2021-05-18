@@ -22,21 +22,14 @@ const run = async () => {
   const mappingFilePath = core.getInput('mapping-file', { required: true });
 
   const mappingFile = path.join(process.env['GITHUB_WORKSPACE'] || '', mappingFilePath);
-  await fs.access(mappingFile, fsConstants.R_OK)
-    .then(
-      async () => {
-        const mapping = await loadFile(mappingFile);
-        return mapping;
-      }, () => {
-        throw { message: `Failed to locate or read file at ${mappingFile}` };
-      })
-    .then((mappings => {
-      const systemManager = new aws.SSM();
-      const fullPathMap = createFullPathMap(paramBasePath, mappings);
-      systemManager.getParametersByPath({
-        Path: paramBasePath
-      }, handleParameterResponse(fullPathMap))
-    }));
+  const mappings = await loadFile(mappingFile);
+
+  const systemManager = new aws.SSM();
+  const fullPathMap = createFullPathMap(paramBasePath, mappings);
+  systemManager.getParametersByPath({
+    Path: paramBasePath
+  }, handleParameterResponse(fullPathMap))
+
 }
 
 const handleParameterResponse = (fullPathMap: Record<string, string>) =>
@@ -86,8 +79,11 @@ const setEnvironmentVariables = async (values: MappedValue[]) => {
 }
 
 const loadFile = async (mappingFile: string): Promise<Mapping[]> => {
-  const contents = await fs.readFile(mappingFile, 'utf-8');
 
+  await fs.access(mappingFile, fsConstants.R_OK)
+    .catch(e => { throw { message: `Failed to locate or read file at ${mappingFile}`, error: e } });
+
+  const contents = await fs.readFile(mappingFile, 'utf-8');
   const parsed = JSON.parse(contents);
   if (typeof parsed === "object") {
     const entries = Object.entries(parsed);
