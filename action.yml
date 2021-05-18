@@ -8,6 +8,10 @@ inputs:
     description: Path from the repo's root to json file describing mapping from ParameterStore values to environment variables
     required: true
     default: '.github/aws-parameter-map.json'
+  with-decryption:
+    description: When `true` Secret String parameters will be decrypted
+    required: false
+    default: false
 runs:
   using: 'node12'
   main: 'lib/index.js'

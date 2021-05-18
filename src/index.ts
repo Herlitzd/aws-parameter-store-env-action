@@ -20,6 +20,7 @@ const run = async () => {
   const paramBasePath = core.getInput('params-root');
 
   const mappingFilePath = core.getInput('mapping-file', { required: true });
+  const withDecryption = core.getInput('with-decryption', { required: false })?.toLowerCase() === 'true';
 
   const mappingFile = path.join(process.env['GITHUB_WORKSPACE'] || '', mappingFilePath);
   const mappings = await loadFile(mappingFile);
@@ -27,7 +28,8 @@ const run = async () => {
   const systemManager = new aws.SSM();
   const fullPathMap = createFullPathMap(paramBasePath, mappings);
   systemManager.getParametersByPath({
-    Path: paramBasePath
+    Path: paramBasePath,
+    WithDecryption: withDecryption
   }, handleParameterResponse(fullPathMap))
 
 }

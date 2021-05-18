@@ -14,10 +14,13 @@ This action assumes that your runner is already configured for AWS access with
     id: Param-Store-Env-Action-Test
     with:
       params-root: "/path1"
+      with-decryption: false
       mapping-file: "./test_mappings/test_map1.json"
 ```
 
 `params-roots` : _`string`_ ParameterStore root path
+
+`with-decryption` : _`boolean`_ `default: false` When `true` Secret String parameters will be decrypted (if the IAM being used has the correct access to do so)
 
 `mapping-file` : _`string`_ Path from the repo's root to json file describing mapping from ParameterStore values to environment variables
 
